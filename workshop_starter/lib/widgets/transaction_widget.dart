@@ -5,8 +5,8 @@ class TransactionWidget extends StatelessWidget {
   final Transaction transaction;
 
   const TransactionWidget({
-    Key key,
-    @required this.transaction,
+    Key? key,
+    required this.transaction,
   }) : super(key: key);
 
   @override

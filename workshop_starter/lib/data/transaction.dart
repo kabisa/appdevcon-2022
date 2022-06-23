@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-
 class Transaction {
   final int kudos;
   final String fromName;
@@ -8,11 +6,11 @@ class Transaction {
   final DateTime createdAt;
 
   Transaction(
-      {@required this.kudos,
-      @required this.fromName,
-      @required this.toName,
-      @required this.note,
-      @required this.createdAt});
+      {required this.kudos,
+      required this.fromName,
+      required this.toName,
+      required this.note,
+      required this.createdAt});
 
   @override
   bool operator ==(Object other) =>

@@ -1,9 +1,8 @@
-
 import 'package:flutter/material.dart';
 
 class NavBar extends StatelessWidget {
   const NavBar({
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override
