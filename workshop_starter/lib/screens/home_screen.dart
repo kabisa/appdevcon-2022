@@ -8,7 +8,7 @@ import 'package:workshop_starter/widgets/transaction_widget.dart';
 class HomeScreen extends StatelessWidget {
   final String title;
 
-  const HomeScreen({Key key, this.title}) : super(key: key);
+  const HomeScreen({Key? key, required this.title}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +32,7 @@ class HomeScreen extends StatelessWidget {
 class HomeScreenBody extends StatelessWidget {
   final List<Transaction> transactions;
 
-  const HomeScreenBody({Key key, @required this.transactions})
+  const HomeScreenBody({Key? key, required this.transactions})
       : super(key: key);
 
   @override

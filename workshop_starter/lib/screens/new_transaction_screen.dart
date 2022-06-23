@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class NewTransactionScreen extends StatelessWidget {
-  NewTransactionScreen({Key key}) : super(key: key);
+  NewTransactionScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
