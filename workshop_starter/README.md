@@ -1,28 +1,27 @@
-# Kudo Flutter Workshop @Kabisa
+# Flutter Workshop
 
 In this repo you'll find a [starter project](./) and the [full finished app](../final_app).
 For this workshop we'll start out with the starter app, but feel free to take a peek at the final app too.
 
 To get going clone this repo and open the `workshop_starter` project in your editor of choice.
-
 ```
-$ git clone git@github.com:kabisa/flutter-workshop.git
-$ cd flutter-workshop/workshop_starter
+$ git clone https://github.com/kabisa/appdevcon-2022.git
+$ cd appdevcon-2022/workshop_starter
 ```
 
-## Step 1: Kudo Card
+## Exercise 1: Kudo Card
 
-Our Product Owner sent you the following task
+The first User Story on our backlog is the following:
 
 > As a user, I want to see a Kudo transaction, so that I display Kudos given and received
 
-The designer sent you a mockup
+The designer sent you a mockup:
 
 ![Kudo Transaction](../_mockups/kudo-card.png "Kudo Transaction")
 
 ---
 
-Together with the team, you discussed, that you will need the following Flutter widgets:
+Together with the team, you discussed, that you'll need the following Flutter widgets:
 
 * [Card](https://api.flutter.dev/flutter/material/Card-class.html)
 * [Circle Avatar](https://api.flutter.dev/flutter/material/CircleAvatar-class.html),
@@ -33,7 +32,7 @@ Together with the team, you discussed, that you will need the following Flutter 
   [Column](https://api.flutter.dev/flutter/widgets/Column-class.html),
   [Padding](https://api.flutter.dev/flutter/widgets/Padding-class.html),
 
-You can implement the Kudo transaction card in [./lib/widgets/transaction_widget.dart](./lib/widgets/transaction_widget.dart).
+You can implement the Kudo transaction card widget in [./lib/widgets/transaction_widget.dart](./lib/widgets/transaction_widget.dart).
 
 <details>
   <summary>Solution</summary>
@@ -43,37 +42,28 @@ You can implement the Kudo transaction card in [./lib/widgets/transaction_widget
 
 ---
 
-# Step 2: Kudo Feed
+# Exercise 2: Kudo Feed
 
-You return victorious from your journey in implementing the Kudo Transaction Card.
-
-Soon the Product Owner comes the room in with a(nother) great idea
+Next on the backlog is the following story:
 
 > As a user, I want to see a Kudo transaction feed, so that I see a list of Kudos given.
 
-The whole thing should look like that
+The whole thing should look like this:
 
 ![Kudo Transactions Feed](../_mockups/kudo-feed.png "Kudo Transactions Feed")
 
-To ship that feature, you will only need this flutter widget
+To ship this feature, you will only need this Flutter widget:
 
 * [ListView](https://api.flutter.dev/flutter/widgets/ListView-class.html)
 
-But that is not the only thing you will need...
+The [Transactions](./lib/data/transactions.dart) class contains some mock data you can use:
 
-A Co-worker appears from behind the desk, and shows you the following dart class
-
-* Kudo [Transactions](./lib/data/transactions.dart) Class
-
-You see that the property `dummyTransactions` is a public property, and you can do
-
-```
+```dart
 Transactions.dummyTransactions
 ```
 
-to retrieve the dummy data.
-
 You can start implementing the ListView in [lib/screens/home_screen.dart](./lib/screens/home_screen.dart).
+When done, move the list view into a separate widget, `TransactionsList`.
 
 <details>
   <summary>Solution</summary>
@@ -90,20 +80,20 @@ You can start implementing the ListView in [lib/screens/home_screen.dart](./lib/
   [Transaction Grid in final app](../final_app/lib/widgets/transaction_grid.dart)
 </details>
 
-## Step 3: Kudo Form
+## Exercise 3: Kudo Form
 
-Great, we can show a Kudo transaction and display them in a list.
+Great, we can nicely display Kudo transactions!
 
-What would be an app without a form, so we come to our final user story
+Now let's make sure we can send Kudos as well:
 
-> As a user, I want to create a Kudo transaction form, so that I can enter new Kudo transactions.
+> As a user I want to send Kudo's to someone, to let them know my appreciation
 
-The mockups show what we need to build
+The mockups show what we need to build:
 
 ![Kudo Form](../_mockups/kudo-form.png "Kudo From")
 ![Kudo Form Keyboard](../_mockups/kudo-form-keyboard.png "Kudo From")
 
-Based on the mockup we will need the following flutter widgets
+Based on the mockup we will need the following Flutter widgets:
 
 * [Form](https://api.flutter.dev/flutter/widgets/Form-class.html)
 * [FormValidators](https://api.flutter.dev/flutter/widgets/FormFieldValidator.html)
@@ -121,7 +111,7 @@ You can start implementing the Kudo Form in [lib/screens/new_transaction_screen.
   * [New Transaction Screen](../final_app/lib/screens/new_transaction_screen.dart)
 </details>
 
-# Step 4: Adding State management and showing the Kudo Submitted Transaction with snackbar
+# Exercise 4: Storing new transactions (in memory) and displaying them
 
 * [Scaffold](https://api.flutter.dev/flutter/material/Scaffold-class.html) To display a snackbar or a persistent bottom sheet
 * [Scaffold.of(context)](https://api.flutter.dev/flutter/material/Scaffold/of.html) to talk with the snackbar
@@ -134,3 +124,15 @@ You can start implementing the Kudo Form in [lib/screens/new_transaction_screen.
   * ChangeNotifier [main.dart](../final_app/lib/main.dart), [lib/data/transactions.dart](../final_app/lib/screens/new_transaction_screen.dart)
   * Consumer [lib/screens/home_screen.dart](../final_app/lib/screens/home_screen.dart), [lib/screens/new_transaction_screen.dart](../final_app/lib/screens/new_transaction_screen.dart)
 </details>
+
+# Exercise 5: Theming
+
+Congrats on making it this far!
+
+Flutter Material widgets can be themed, see [these docs](https://docs.flutter.dev/cookbook/design/themes).
+Play around with colors, fonts, etc.
+
+# Exercise 6: Building for other platforms
+
+Everything we've built so far is 100% multi-platform compatible. 
+Install either the iOS or Android SDK and run the application on iOS or Android. Follow the docs [here](https://docs.flutter.dev/get-started/install) for instructions on which tools are needed.
