@@ -2,7 +2,7 @@
 
 ## Getting Started
 
-For this workshop we'll be using Flutter Desktop, to minimize the number of required dependencies.
+For this workshop we need to install Flutter and development tools for at least one of the platforms that Flutter supports.  
 
 1. Install Flutter following the [official docs](https://docs.flutter.dev/get-started/install).
 2. Install the VSCode Flutter plugin (https://flutter.dev/docs/get-started/editor?tab=vscode)
