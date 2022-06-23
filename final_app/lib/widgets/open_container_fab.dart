@@ -3,14 +3,16 @@ import 'package:flutter/material.dart';
 
 const double _fabDimension = 56.0;
 
-class OpenContainerFab extends StatelessWidget {
+class OpenContainerFab<T> extends StatelessWidget {
   final Widget child;
   final OpenContainerBuilder openContainerBuilder;
+  final ClosedCallback<T?> onClosed;
 
   const OpenContainerFab({
-    Key key,
-    @required this.child,
-    @required this.openContainerBuilder,
+    Key? key,
+    required this.child,
+    required this.openContainerBuilder,
+    required this.onClosed,
   }) : super(key: key);
 
   @override
@@ -22,6 +24,7 @@ class OpenContainerFab extends StatelessWidget {
             Radius.circular(_fabDimension / 2),
           ),
         ),
+        onClosed: (result) {},
         closedBuilder: (BuildContext context, VoidCallback openContainer) {
           return SizedBox(
             height: _fabDimension,

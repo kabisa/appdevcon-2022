@@ -22,7 +22,8 @@ class Transactions with ChangeNotifier {
         toName: "Vivian Casey",
         createdAt: DateTime.parse("2020-04-02T09:56:52.285789+0200"),
         kudos: 10,
-        note: "that thing you don’t like about yourself is what makes you so interesting."),
+        note:
+            "that thing you don’t like about yourself is what makes you so interesting."),
     Transaction(
         fromName: "Kerry Kelcey",
         toName: "Leighton Dezi",
@@ -38,7 +39,7 @@ class Transactions with ChangeNotifier {
   ];
 
   bool _isLoading = false;
-  Transaction _lastAddedTransaction = null;
+  Transaction? _lastAddedTransaction = null;
   List<Transaction> _transactions = [];
 
   List<Transaction> get() {

@@ -5,9 +5,9 @@ import 'package:flutter_workshop/widgets/transaction_widget.dart';
 
 class TransactionList extends StatelessWidget {
   const TransactionList({
-    Key key,
-    @required this.transactions,
-    @required this.refresh,
+    Key? key,
+    required this.transactions,
+    required this.refresh,
   }) : super(key: key);
 
   final List<Transaction> transactions;

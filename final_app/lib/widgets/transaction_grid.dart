@@ -8,9 +8,9 @@ class TransactionGrid extends StatelessWidget {
   static const ITEM_MIN_WIDTH = 300;
 
   const TransactionGrid({
-    Key key,
-    @required this.transactions,
-    @required this.refresh,
+    Key? key,
+    required this.transactions,
+    required this.refresh,
   }) : super(key: key);
 
   final List<Transaction> transactions;

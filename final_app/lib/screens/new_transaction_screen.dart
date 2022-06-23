@@ -7,17 +7,13 @@ import 'package:provider/provider.dart';
 
 class NewTransactionScreen extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
-  final VoidCallback onTransactionCreated;
-
-  NewTransactionScreen({Key key, @required this.onTransactionCreated})
-      : super(key: key);
 
   Transaction _buildTransaction(NewTransactionFormData formData) {
     return Transaction(
         fromName: "I",
-        toName: formData.receivers,
-        kudos: formData.kudos,
-        note: formData.message,
+        toName: formData.receivers!,
+        kudos: formData.kudos!,
+        note: formData.message!,
         createdAt: DateTime.now());
   }
 
@@ -31,10 +27,10 @@ class NewTransactionScreen extends StatelessWidget {
             builder: (context, transactions, _) => NewTransactionForm(
                 formKey: _formKey,
                 onSubmit: (formData) {
-                  transactions.add(_buildTransaction(formData));
-                  onTransactionCreated();
+                  final transaction = _buildTransaction(formData);
+                  transactions.add(transaction);
 
-                  Navigator.of(context).pop();
+                  Navigator.of(context).pop(transaction);
                 }),
           )),
     );
@@ -42,9 +38,9 @@ class NewTransactionScreen extends StatelessWidget {
 }
 
 class NewTransactionFormData {
-  int kudos;
-  String receivers;
-  String message;
+  num? kudos;
+  String? receivers;
+  String? message;
 
   @override
   String toString() {
@@ -57,9 +53,9 @@ class NewTransactionForm extends StatefulWidget {
   final Function(NewTransactionFormData) onSubmit;
 
   const NewTransactionForm({
-    Key key,
-    @required GlobalKey<FormState> formKey,
-    @required this.onSubmit,
+    Key? key,
+    required GlobalKey<FormState> formKey,
+    required this.onSubmit,
   })  : _formKey = formKey,
         super(key: key);
 
@@ -72,8 +68,9 @@ class _NewTransactionFormState extends State<NewTransactionForm> {
   final FocusNode _focusNode = FocusNode();
 
   void _submit() {
-    if (widget._formKey.currentState.validate()) {
-      widget._formKey.currentState.save();
+    if (widget._formKey.currentState != null &&
+        widget._formKey.currentState!.validate()) {
+      widget._formKey.currentState!.save();
       widget.onSubmit(this._data);
     }
   }
@@ -107,7 +104,7 @@ class _NewTransactionFormState extends State<NewTransactionForm> {
                 hintText: 'Amount of kudos',
               ),
               validator: FormValidators.greaterThan(0),
-              onSaved: (value) => _data.kudos = num.parse(value),
+              onSaved: (value) => _data.kudos = num.parse(value!),
             ),
             Container(
               margin: EdgeInsets.only(top: 10),

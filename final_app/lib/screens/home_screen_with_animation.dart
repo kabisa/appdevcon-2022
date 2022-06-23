@@ -1,52 +1,38 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_workshop/data/transactions.dart';
 import 'package:flutter_workshop/screens/new_transaction_screen.dart';
+import 'package:flutter_workshop/widgets/open_container_fab.dart';
 import 'package:flutter_workshop/widgets/transaction_grid.dart';
 import 'package:provider/provider.dart';
 
-class HomeScreen extends StatelessWidget {
+/**
+ * Alternative HomeScreen with a nice 'Open Container' animation
+ */
+class HomeScreenWithAnimation extends StatelessWidget {
   final String title;
 
-  const HomeScreen({Key? key, required this.title}) : super(key: key);
+  const HomeScreenWithAnimation({Key? key, required this.title})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final transactions = context.watch<Transactions>();
+    final body = Consumer<Transactions>(builder: (_ctx, transactions, _child) {
+      return HomeScreenBody(transactions: transactions);
+    });
+
+    final fab = Consumer<Transactions>(builder: (_ctx, transactions, _child) {
+      return HomeFAB(
+        transactions: transactions,
+      );
+    });
 
     return Scaffold(
         appBar: AppBar(
           title: Text(title),
         ),
         bottomNavigationBar: NavBar(),
-        body: HomeScreenBody(transactions: transactions),
-        floatingActionButton: FloatingActionButton(
-            tooltip: 'Increment',
-            child: const Icon(Icons.add),
-            onPressed: () => this._onAddPressed(context, transactions)));
-  }
-
-  _onAddPressed(BuildContext context, Transactions transactions) async {
-    final result = await Navigator.of(context).push(MaterialPageRoute(
-        fullscreenDialog: true, builder: (_) => NewTransactionScreen()));
-
-    if (result != null) {
-      this._onTransactionCreated(context, transactions);
-    }
-  }
-
-  _onTransactionCreated(BuildContext context, Transactions transactions) {
-    // Dismiss currently displayed snackbar, if any
-    ScaffoldMessenger.of(context).removeCurrentSnackBar();
-
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-      content: Text('₭udos sent! 💰'),
-      action: SnackBarAction(
-        label: "UNDO",
-        onPressed: () {
-          transactions.undoAdd();
-        },
-      ),
-    ));
+        body: body,
+        floatingActionButton: fab);
   }
 }
 
@@ -94,5 +80,43 @@ class HomeScreenBody extends StatelessWidget {
 
     return Center(
         child: Padding(padding: const EdgeInsets.all(8.0), child: child));
+  }
+}
+
+class HomeFAB extends StatelessWidget {
+  final Transactions transactions;
+
+  const HomeFAB({
+    Key? key,
+    required this.transactions,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final openContainer = (_ctx, _) => NewTransactionScreen();
+
+    return OpenContainerFab(
+        child: Icon(Icons.add, color: Colors.white),
+        openContainerBuilder: openContainer,
+        onClosed: (result) {
+          if (result != null) {
+            this._onTransactionCreated(context);
+          }
+        });
+  }
+
+  _onTransactionCreated(BuildContext context) {
+    // Dismiss currently displayed snackbar, if any
+    ScaffoldMessenger.of(context).removeCurrentSnackBar();
+
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      content: Text('₭udos sent! 💰'),
+      action: SnackBarAction(
+        label: "UNDO",
+        onPressed: () {
+          this.transactions.undoAdd();
+        },
+      ),
+    ));
   }
 }
